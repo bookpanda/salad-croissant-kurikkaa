@@ -43,6 +43,7 @@ export class ClicksGateway
 
     this.clicksService.click(choice);
 
-    this.io.emit('click', choice);
+    const newScores = await this.clicksService.getScores();
+    this.io.emit('update', newScores);
   }
 }

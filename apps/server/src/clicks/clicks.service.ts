@@ -15,6 +15,12 @@ export class ClicksService {
   async click(choice: string) {
     this.logger.log(`click, ${choice}`);
 
-    // return await this.clickRepository.click(choice);
+    return await this.clickRepository.click(choice);
+  }
+
+  async getScores() {
+    this.logger.log('getScores');
+
+    return await this.clickRepository.getScores();
   }
 }
