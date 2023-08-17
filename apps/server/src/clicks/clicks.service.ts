@@ -11,4 +11,10 @@ export class ClicksService {
 
     // return await this.clickRepository.join();
   }
+
+  async click(choice: string) {
+    this.logger.log(`click, ${choice}`);
+
+    // return await this.clickRepository.click(choice);
+  }
 }
