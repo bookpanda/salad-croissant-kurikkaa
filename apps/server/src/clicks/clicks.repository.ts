@@ -4,8 +4,8 @@ import { Redis } from 'ioredis';
 import { IORedisKey } from 'src/modules/redis.module';
 
 @Injectable()
-export class ClickRepository {
-  private readonly logger = new Logger(ClickRepository.name);
+export class ClicksRepository {
+  private readonly logger = new Logger(ClicksRepository.name);
 
   constructor(
     private configService: ConfigService,
