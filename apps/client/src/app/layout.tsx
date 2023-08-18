@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Providers } from "./providers";
 import { Layout } from "@/modules/Layout";
+import { AppProvider } from "@/core/context/appProvider";
 
 export const metadata: Metadata = {
   title: "Salad-Croissant",
@@ -16,7 +17,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <Providers>
-          <Layout>{children}</Layout>
+          <AppProvider>
+            <Layout>{children}</Layout>
+          </AppProvider>
         </Providers>
       </body>
     </html>
