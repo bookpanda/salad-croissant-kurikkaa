@@ -27,5 +27,10 @@ export const createSocketWithHandlers = ({
     console.log("WebSockets exception: ", error);
   });
 
+  socket.on("update", (scores) => {
+    console.log("event: update", scores);
+    context.updateScores(scores);
+  });
+
   return socket;
 };

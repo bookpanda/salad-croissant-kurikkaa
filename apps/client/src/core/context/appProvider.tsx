@@ -1,14 +1,15 @@
 "use client";
 
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { AppContext } from "./appContext";
 import { createSocketWithHandlers } from "@/socket-io";
 import { socketIOUrl } from "../../socket-io";
+import { Scores } from "./types";
 
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
-  let socket = null;
+  const [socket, setSocket] = useState(null);
   const initializeSocket = () => {
-    if (!socket) socket = createSocketWithHandlers({ socketIOUrl, context });
+    if (!socket) setSocket(createSocketWithHandlers({ socketIOUrl, context }));
     return;
   };
 
@@ -19,11 +20,18 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
     initializeSocket();
   }, []);
 
-  const click = (type: "salad" | "croissant") => {
-    if (type === "salad") {
-      setCountSalad(countSalad + 1);
-    } else {
-      setCountCroissant(countCroissant + 1);
+  const click = async (type: "salad" | "croissant") => {
+    try {
+      await socket.emit("click", { choice: type });
+    } catch (error) {
+      console.log("Error clicking", error);
+    }
+  };
+
+  const updateScores = (scores: Scores) => {
+    if (scores) {
+      setCountSalad(scores.salad);
+      setCountCroissant(scores.croissant);
     }
   };
 
@@ -33,6 +41,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
     countSalad,
     countCroissant,
     click,
+    updateScores,
   };
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
 };
