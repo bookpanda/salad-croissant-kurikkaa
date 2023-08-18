@@ -11,6 +11,7 @@ import { IORedisKey } from 'src/modules/redis.module';
 @Injectable()
 export class ClicksRepository {
   private readonly logger = new Logger(ClicksRepository.name);
+  private cooldown = new Date(new Date().getTime() - 1000 * 5);
 
   constructor(
     private configService: ConfigService,
@@ -22,12 +23,20 @@ export class ClicksRepository {
 
     const key = 'clicks';
 
-    try {
-      await this.redisClient.hincrby(key, choice, 1);
+    if (new Date() > this.cooldown) {
+      try {
+        await this.redisClient.hincrby(key, choice, 1);
+        this.cooldown = new Date(new Date().getTime() + 1000 * 5);
+        return await this.getScores();
+      } catch (error) {
+        this.logger.error(
+          `Error incrementing click count: ${choice}\n${error}`,
+        );
+        throw new InternalServerErrorException();
+      }
+    } else {
+      this.logger.log('Cooldown period, not incrementing click count');
       return await this.getScores();
-    } catch (error) {
-      this.logger.error(`Error incrementing click count: ${choice}\n${error}`);
-      throw new InternalServerErrorException();
     }
   }
 
