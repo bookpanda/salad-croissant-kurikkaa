@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import { Providers } from "./providers";
+import { Layout } from "@/modules/Layout";
 
 export const metadata: Metadata = {
   title: "Salad-Croissant",
@@ -12,7 +14,11 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
+      </body>
     </html>
   );
 }
