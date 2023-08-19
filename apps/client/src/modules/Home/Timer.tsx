@@ -8,7 +8,6 @@ export const Timer: FC = () => {
   const { cooldown } = useAppContext();
   const [key, setKey] = useState(0);
   const duration = Math.max(cooldown - new Date().getTime(), 0) / 1000;
-  console.log(duration);
 
   useEffect(() => {
     setKey((prev) => prev + 1);

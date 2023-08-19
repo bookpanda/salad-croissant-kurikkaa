@@ -10,12 +10,14 @@ interface ClickerProps {
 }
 
 export const Clicker: FC<ClickerProps> = ({ item, count }) => {
-  const { click } = useAppContext();
+  const { click, isCooldown } = useAppContext();
   return (
     <Flex flexDir="column" alignItems="center" gap={8}>
       <Text fontSize={h2}>{count}</Text>
       <ImageButton src={item} />
-      <Button onClick={() => click(item)}>押す</Button>
+      <Button isDisabled={isCooldown} onClick={() => click(item)}>
+        押す
+      </Button>
     </Flex>
   );
 };

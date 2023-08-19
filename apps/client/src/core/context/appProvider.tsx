@@ -16,10 +16,25 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   const [countSalad, setCountSalad] = useState(0);
   const [countCroissant, setCountCroissant] = useState(0);
   const [cooldown, setCooldown] = useState(0);
+  const [isCooldown, setIsCooldown] = useState(false);
 
   useEffect(() => {
     initializeSocket();
   }, []);
+
+  useEffect(() => {
+    if (cooldown > new Date().getTime()) {
+      setIsCooldown(true);
+      const duration = Math.max(cooldown - new Date().getTime(), 0);
+      const timeout = setTimeout(() => {
+        setIsCooldown(false);
+      }, duration);
+
+      return () => clearTimeout(timeout);
+    } else {
+      setIsCooldown(false);
+    }
+  }, [cooldown]);
 
   const click = async (type: "salad" | "croissant") => {
     try {
@@ -43,6 +58,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
     countSalad,
     countCroissant,
     cooldown,
+    isCooldown,
     click,
     updateScores,
   };

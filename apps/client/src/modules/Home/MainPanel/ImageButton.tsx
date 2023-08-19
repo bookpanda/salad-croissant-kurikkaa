@@ -8,12 +8,12 @@ interface ImageButtonProps {
 }
 
 export const ImageButton: FC<ImageButtonProps> = ({ src }) => {
-  const { click } = useAppContext();
+  const { click, isCooldown } = useAppContext();
   return (
     <Flex
       height="20vh"
       onClick={() => click(src)}
-      _hover={{ cursor: "pointer" }}
+      _hover={{ cursor: isCooldown ? "not-allowed" : "pointer" }}
     >
       <Image
         src={`/images/${src}.webp`}

@@ -8,6 +8,7 @@ export interface IAppContext {
   countSalad: number;
   countCroissant: number;
   cooldown: number;
+  isCooldown: boolean;
   click: (type: "salad" | "croissant") => void;
   updateScores: (scores: Scores) => void;
 }
@@ -18,6 +19,7 @@ export const AppContext = createContext<IAppContext>({
   countCroissant: 0,
   countSalad: 0,
   cooldown: 0,
+  isCooldown: false,
   click: () => {},
   updateScores: () => {},
 });
