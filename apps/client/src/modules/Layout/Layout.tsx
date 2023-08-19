@@ -10,7 +10,7 @@ interface LayoutProps {
 export const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Container maxW={"90%"}>{children}</Container>
+      <Container maxW={{ base: "95%", md: "90%" }}>{children}</Container>
     </>
   );
 };

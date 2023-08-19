@@ -1,5 +1,5 @@
 import { useAppContext } from "@/core/context/appContext";
-import { h4 } from "@/theme/fontSizes";
+import { h2, h3, h4 } from "@/theme/fontSizes";
 import { Flex, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
@@ -25,7 +25,7 @@ export const Timer: FC = () => {
         colorsTime={[7, 5, 2, 0]}
       >
         {({ remainingTime }) => (
-          <Text fontSize={h4} fontWeight={"bold"}>
+          <Text fontSize={h2} fontWeight={"bold"}>
             {remainingTime}
           </Text>
         )}

@@ -12,8 +12,10 @@ interface ClickerProps {
 export const Clicker: FC<ClickerProps> = ({ item, count }) => {
   const { click, isCooldown } = useAppContext();
   return (
-    <Flex flexDir="column" alignItems="center" gap={8}>
-      <Text fontSize={h2}>{count}</Text>
+    <Flex flexDir="column" alignItems="center" gap={{ base: 3, lg: 5, xl: 8 }}>
+      <Text fontWeight="bold" fontSize={h2}>
+        {count}
+      </Text>
       <ImageButton src={item} />
       <Button
         colorScheme="telegram"
