@@ -6,7 +6,7 @@ import { Clicker } from "./Clicker";
 export const MainPanel: FC = () => {
   const { countSalad, countCroissant } = useAppContext();
   return (
-    <Flex w={"80vw"} justifyContent={"space-between"}>
+    <Flex w="100%" bgColor="pink" justifyContent={"space-between"}>
       <Clicker item="salad" count={countSalad} />
       <Clicker item="croissant" count={countCroissant} />
     </Flex>
