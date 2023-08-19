@@ -15,7 +15,11 @@ export const Clicker: FC<ClickerProps> = ({ item, count }) => {
     <Flex flexDir="column" alignItems="center" gap={8}>
       <Text fontSize={h2}>{count}</Text>
       <ImageButton src={item} />
-      <Button isDisabled={isCooldown} onClick={() => click(item)}>
+      <Button
+        colorScheme="telegram"
+        isDisabled={isCooldown}
+        onClick={() => click(item)}
+      >
         押す
       </Button>
     </Flex>

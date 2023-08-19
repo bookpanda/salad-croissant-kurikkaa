@@ -24,6 +24,7 @@ export const ImageButton: FC<ImageButtonProps> = ({ src }) => {
         style={{
           objectFit: "scale-down",
           minHeight: "100%",
+          filter: isCooldown ? "grayscale(60%)" : "none",
         }}
       />
     </Flex>
