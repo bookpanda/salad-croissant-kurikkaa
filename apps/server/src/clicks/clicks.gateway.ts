@@ -9,7 +9,7 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { ClicksService } from './clicks.service';
-import { Namespace } from 'socket.io';
+import { Namespace, Socket } from 'socket.io';
 
 @WebSocketGateway({ namespace: 'clicks' })
 export class ClicksGateway
@@ -24,10 +24,11 @@ export class ClicksGateway
     this.logger.log('Websocket gateway initialized');
   }
 
-  async handleConnection() {
+  async handleConnection(client: Socket) {
     const sockets = this.io.sockets;
     this.logger.log(`Socket connected with user`);
     this.logger.debug(`Number of connected sockets: ${sockets.size}`);
+    client.emit('update', await this.clicksService.getScores());
   }
 
   async handleDisconnect() {
