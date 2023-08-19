@@ -4,8 +4,8 @@ import { Layout } from "@/modules/Layout";
 import { AppProvider } from "@/core/context/appProvider";
 
 export const metadata: Metadata = {
-  title: "Salad-Croissant",
-  description: "Salad-Croissant Kurikka!",
+  title: "SALAD-CROISSANT",
+  description: "サラダとクロワッサン クリッカー！",
 };
 
 interface RootLayoutProps {
