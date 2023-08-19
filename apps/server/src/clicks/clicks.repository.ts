@@ -7,6 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { Redis } from 'ioredis';
 import { IORedisKey } from 'src/modules/redis.module';
+import { Scores } from 'shared';
 
 @Injectable()
 export class ClicksRepository {
@@ -40,11 +41,16 @@ export class ClicksRepository {
     }
   }
 
-  async getScores() {
+  async getScores(): Promise<Scores> {
     this.logger.log('getScores');
 
     try {
-      return await this.redisClient.hgetall('clicks');
+      const scores = await this.redisClient.hgetall('clicks');
+      return {
+        salad: parseInt(scores.salad),
+        croissant: parseInt(scores.croissant),
+        cooldown: this.cooldown.getTime(),
+      };
     } catch (error) {
       this.logger.error(`Error getting scores\n${error}`);
       throw new InternalServerErrorException();

@@ -56,6 +56,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      shared:
+        specifier: workspace:*
+        version: link:../../packages/shared
       socket.io-client:
         specifier: ^4.7.2
         version: 4.7.2
@@ -120,6 +123,9 @@ importers:
       rxjs:
         specifier: ^7.2.0
         version: 7.8.1
+      shared:
+        specifier: workspace:*
+        version: link:../../packages/shared
       socket.io:
         specifier: ^4.7.2
         version: 4.7.2
@@ -202,6 +208,8 @@ importers:
       eslint-plugin-react:
         specifier: 7.28.0
         version: 7.28.0(eslint@8.0.1)
+
+  packages/shared: {}
 
   packages/tsconfig: {}
 

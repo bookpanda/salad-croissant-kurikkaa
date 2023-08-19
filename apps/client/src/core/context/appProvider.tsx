@@ -1,10 +1,10 @@
 "use client";
 
-import { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
+import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { AppContext } from "./appContext";
 import { createSocketWithHandlers } from "@/socket-io";
 import { socketIOUrl } from "../../socket-io";
-import { Scores } from "./types";
+import { Scores } from "shared";
 
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   const [socket, setSocket] = useState(null);
@@ -15,6 +15,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const [countSalad, setCountSalad] = useState(0);
   const [countCroissant, setCountCroissant] = useState(0);
+  const [cooldown, setCooldown] = useState(0);
 
   useEffect(() => {
     initializeSocket();
@@ -32,6 +33,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
     if (scores) {
       setCountSalad(scores.salad);
       setCountCroissant(scores.croissant);
+      setCooldown(scores.cooldown);
     }
   };
 
@@ -40,6 +42,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
     initializeSocket,
     countSalad,
     countCroissant,
+    cooldown,
     click,
     updateScores,
   };
