@@ -5,6 +5,7 @@ import { MainPanel } from "./MainPanel";
 import { Header } from "./Header";
 import { Timer } from "./Timer";
 import { Flex } from "@chakra-ui/react";
+import { Results } from "./Results";
 
 export const Home: FC = () => {
   return (
@@ -12,6 +13,7 @@ export const Home: FC = () => {
       <Header />
       <Timer />
       <MainPanel />
+      <Results />
     </Flex>
   );
 };
