@@ -6,10 +6,10 @@ export class ClicksService {
   private readonly logger = new Logger(ClicksService.name);
   constructor(private readonly clickRepository: ClicksRepository) {}
 
-  async join() {
-    this.logger.log('join');
+  async init() {
+    this.logger.log('Initializing Redis');
 
-    // return await this.clickRepository.join();
+    return await this.clickRepository.init();
   }
 
   async click(choice: string) {
@@ -22,5 +22,11 @@ export class ClicksService {
     this.logger.log('getScores');
 
     return await this.clickRepository.getScores();
+  }
+
+  async resetScores() {
+    this.logger.log('resetScores');
+
+    return await this.clickRepository.resetScores();
   }
 }

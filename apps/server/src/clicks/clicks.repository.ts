@@ -3,6 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
+  forwardRef,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Redis } from 'ioredis';
@@ -16,8 +17,21 @@ export class ClicksRepository {
 
   constructor(
     private configService: ConfigService,
-    @Inject(IORedisKey) private readonly redisClient: Redis,
+    @Inject(forwardRef(() => IORedisKey)) private readonly redisClient: Redis,
   ) {}
+
+  async init() {
+    this.logger.log('Initializing Redis');
+    const key = 'clicks';
+
+    try {
+      await this.redisClient.hsetnx(key, 'salad', 0);
+      await this.redisClient.hsetnx(key, 'croissant', 0);
+    } catch (error) {
+      this.logger.error(`Error initializing Redis\n${error}`);
+      throw new InternalServerErrorException();
+    }
+  }
 
   async click(choice: string) {
     this.logger.log(`click, ${choice}`);
@@ -53,6 +67,18 @@ export class ClicksRepository {
       };
     } catch (error) {
       this.logger.error(`Error getting scores\n${error}`);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  async resetScores() {
+    this.logger.log('resetScores');
+
+    try {
+      await this.redisClient.del('clicks');
+      await this.init();
+    } catch (error) {
+      this.logger.error(`Error resetting scores\n${error}`);
       throw new InternalServerErrorException();
     }
   }

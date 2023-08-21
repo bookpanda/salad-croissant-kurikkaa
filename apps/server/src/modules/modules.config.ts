@@ -1,10 +1,15 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RedisModule } from './redis.module';
-import { Logger } from '@nestjs/common';
+import { Logger, forwardRef } from '@nestjs/common';
+import { ClicksModule } from 'src/clicks/clicks.module';
+import { ClicksService } from 'src/clicks/clicks.service';
 
 export const redisModule = RedisModule.registerAsync({
-  imports: [ConfigModule],
-  useFactory: async (configService: ConfigService) => {
+  imports: [ConfigModule, forwardRef(() => ClicksModule)],
+  useFactory: async (
+    configService: ConfigService,
+    clickService: ClicksService,
+  ) => {
     const logger = new Logger('RedisModule');
 
     return {
@@ -23,12 +28,13 @@ export const redisModule = RedisModule.registerAsync({
           logger.log(
             `Redis client connected on ${client.options.host}:${client.options.port}`,
           );
+          clickService.init();
         });
       },
     };
   },
 
-  inject: [ConfigService],
+  inject: [ConfigService, ClicksService],
 });
 
 // export const jwtModule = JwtModule.registerAsync({
