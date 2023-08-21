@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { Socket } from "socket.io-client";
-import { Scores } from "shared";
+import { Results, Scores } from "shared";
 
 export interface IAppContext {
   socket: Socket | null;
@@ -11,6 +11,7 @@ export interface IAppContext {
   isCooldown: boolean;
   click: (type: "salad" | "croissant") => void;
   updateScores: (scores: Scores) => void;
+  results: Results;
 }
 
 export const AppContext = createContext<IAppContext>({
@@ -22,6 +23,7 @@ export const AppContext = createContext<IAppContext>({
   isCooldown: false,
   click: () => {},
   updateScores: () => {},
+  results: [],
 });
 
 export function useAppContext() {

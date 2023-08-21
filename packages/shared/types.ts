@@ -4,7 +4,7 @@ export type Scores = {
   cooldown: number;
 };
 
-export type Result = {
+export type Results = {
   id: number;
   salad: number;
   croissant: number;

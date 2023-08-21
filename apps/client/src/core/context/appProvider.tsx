@@ -4,7 +4,8 @@ import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { AppContext } from "./appContext";
 import { createSocketWithHandlers } from "@/socket-io";
 import { socketIOUrl } from "../../socket-io";
-import { Scores } from "shared";
+import { Results, Scores } from "shared";
+import { getResults } from "../api/getResults";
 
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   const [socket, setSocket] = useState(null);
@@ -17,9 +18,15 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   const [countCroissant, setCountCroissant] = useState(0);
   const [cooldown, setCooldown] = useState(0);
   const [isCooldown, setIsCooldown] = useState(false);
+  const [results, setResults] = useState<Results>([]);
 
   useEffect(() => {
     initializeSocket();
+    const fetchResults = async () => {
+      const data = await getResults();
+      setResults(data.data);
+    };
+    fetchResults();
   }, []);
 
   useEffect(() => {
@@ -61,6 +68,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
     isCooldown,
     click,
     updateScores,
+    results,
   };
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
 };
