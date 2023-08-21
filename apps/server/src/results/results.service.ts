@@ -15,8 +15,8 @@ export class ResultsService {
     private clickService: ClicksService,
   ) {}
 
-  //   @Cron('0 0 * * *')
-  @Cron(CronExpression.EVERY_30_SECONDS)
+  // @Cron(CronExpression.EVERY_30_SECONDS)
+  @Cron('0 0 * * *')
   async resetScore() {
     this.logger.log('Resetting score');
     const scores = await this.clickService.getScores();
