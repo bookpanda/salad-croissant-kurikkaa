@@ -3,3 +3,11 @@ export type Scores = {
   croissant: number;
   cooldown: number;
 };
+
+export type Result = {
+  id: number;
+  salad: number;
+  croissant: number;
+  createdAt: string;
+  updateAt: string;
+}[];

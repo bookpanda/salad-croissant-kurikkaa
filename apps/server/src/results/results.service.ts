@@ -50,7 +50,7 @@ export class ResultsService {
         orderBy: {
           createdAt: 'desc',
         },
-        take: 10,
+        take: 30,
       });
       return results;
     } catch (error) {
