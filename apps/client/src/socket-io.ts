@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 import { IAppContext } from "./core/context/appContext";
 
-export const socketIOUrl = process.env.NEXT_PUBLIC_SOCKET_HOST;
+export const socketIOUrl = process.env["NEXT_PUBLIC_SOCKET_HOST"];
 
 type CreateSocketOptions = {
   socketIOUrl: string;

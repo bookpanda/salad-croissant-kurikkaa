@@ -2,7 +2,7 @@ import { ApiError } from "next/dist/server/api-utils";
 import { Results } from "shared";
 
 export const getResults = async () => {
-  const url = process.env.NEXT_PUBLIC_SERVER;
+  const url = process.env["NEXT_PUBLIC_SERVER"];
   try {
     const response = await fetch(`${url}/results`, {
       method: "GET",
