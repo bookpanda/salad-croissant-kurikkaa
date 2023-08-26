@@ -8,7 +8,11 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     super({
       datasources: {
         db: {
-          url: config.get<string>('DATABASE_URL'),
+          url: config.get<string>(
+            process.env.NODE_ENV === 'production'
+              ? 'PROD_DATABASE_URL'
+              : 'DATABASE_URL',
+          ),
         },
       },
     });

@@ -14,7 +14,11 @@ export const redisModule = RedisModule.registerAsync({
 
     return {
       connectionOptions: {
-        host: configService.get('REDIS_HOST'),
+        host: configService.get(
+          process.env.NODE_ENV === 'production'
+            ? 'REDIS_PROD_HOST'
+            : 'REDIS_HOST',
+        ),
         port: configService.get('REDIS_PORT'),
       },
       onClientReady: (client) => {

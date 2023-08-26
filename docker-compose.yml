@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3001:3001
+    command: ["./entrypoint.sh"]
+
   redis:
     image: 'redislabs/rejson:2.0.0'
     ports:
