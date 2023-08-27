@@ -19,11 +19,15 @@ services:
 
   redis:
     image: 'redislabs/rejson:2.0.0'
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    command: ['redis-server', '--requirepass', '${REDIS_PASSWORD}']
     ports:
       - 6379:6379
     volumes:
       - redis-data:/data
-
+    restart: unless-stopped
+    
   postgres:
     image: postgres:alpine
     environment:
