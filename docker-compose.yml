@@ -13,6 +13,7 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - PORT=${PORT}
       - CLIENT_PORT=${CLIENT_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - 3001:3001
     command: ["./entrypoint.sh"]
