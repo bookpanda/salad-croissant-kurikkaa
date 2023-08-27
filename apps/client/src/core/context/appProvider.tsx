@@ -30,12 +30,11 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (cooldown > new Date().getTime()) {
+    if (cooldown > 0) {
       setIsCooldown(true);
-      const duration = Math.max(cooldown - new Date().getTime(), 0);
       const timeout = setTimeout(() => {
         setIsCooldown(false);
-      }, duration);
+      }, cooldown);
 
       return () => clearTimeout(timeout);
     } else {

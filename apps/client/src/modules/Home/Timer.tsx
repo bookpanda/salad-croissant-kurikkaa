@@ -7,7 +7,7 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 export const Timer: FC = () => {
   const { cooldown } = useAppContext();
   const [key, setKey] = useState(0);
-  const duration = Math.max(cooldown - new Date().getTime(), 0) / 1000;
+  const duration = cooldown / 1000;
 
   useEffect(() => {
     setKey((prev) => prev + 1);

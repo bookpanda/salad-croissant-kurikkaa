@@ -63,7 +63,7 @@ export class ClicksRepository {
       return {
         salad: parseInt(scores.salad),
         croissant: parseInt(scores.croissant),
-        cooldown: this.cooldown.getTime(),
+        cooldown: Math.max(this.cooldown.getTime() - new Date().getTime(), 0),
       };
     } catch (error) {
       this.logger.error(`Error getting scores\n${error}`);
