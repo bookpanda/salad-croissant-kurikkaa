@@ -43,10 +43,12 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [cooldown]);
 
   const click = async (type: "salad" | "croissant") => {
-    try {
-      await socket.emit("click", { choice: type });
-    } catch (error) {
-      console.log("Error clicking", error);
+    if (!isCooldown) {
+      try {
+        await socket.emit("click", { choice: type });
+      } catch (error) {
+        console.log("Error clicking", error);
+      }
     }
   };
 
