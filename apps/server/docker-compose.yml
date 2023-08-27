@@ -10,11 +10,6 @@ services:
       - 6379:6379
     volumes:
       - redis-data:/data
-      # - ./generate_config.sh:/usr/local/etc/redis/generate_config.sh
-      # - ./redis.template.conf:/usr/local/etc/redis/redis.template.conf
-      # - ./redis.template.conf:/redis.template.conf
-    # entrypoint: ./generate_config.sh
-    # command: ['./generate_config.sh']
     restart: unless-stopped
 
   postgres:
