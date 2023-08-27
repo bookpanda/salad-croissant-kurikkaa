@@ -11,6 +11,7 @@ services:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PROD_HOST=${REDIS_PROD_HOST}
       - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - PORT=${PORT}
       - CLIENT_PORT=${CLIENT_PORT}
     ports:
@@ -27,7 +28,7 @@ services:
     volumes:
       - redis-data:/data
     restart: unless-stopped
-    
+
   postgres:
     image: postgres:alpine
     environment:
