@@ -16,7 +16,7 @@ export class ResultsService {
   ) {}
 
   // @Cron(CronExpression.EVERY_30_SECONDS)
-  @Cron('0 1 * * *', { name: 'resetScore', timeZone: 'Asia/Bangkok' })
+  @Cron('5 1 * * *', { name: 'resetScore', timeZone: 'Asia/Bangkok' })
   async resetScore() {
     this.logger.log('Resetting score');
     const scores = await this.clickService.getScores();
