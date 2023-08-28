@@ -8,7 +8,7 @@ import { ResultsModule } from './results/results.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, cache: false }),
     ClicksModule,
     PrismaModule,
     ResultsModule,
