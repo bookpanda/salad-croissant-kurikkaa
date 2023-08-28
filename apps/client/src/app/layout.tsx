@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Providers } from "./providers";
 import { Layout } from "@/modules/Layout";
 import { AppProvider } from "@/core/context/appProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "SALAD-CROISSANT",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#ffffff"></meta>
       <body>
+        <Analytics />
         <Providers>
           <AppProvider>
             <Layout>{children}</Layout>
