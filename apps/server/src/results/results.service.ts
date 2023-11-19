@@ -3,7 +3,7 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
+import { Cron } from '@nestjs/schedule';
 import { ClicksService } from 'src/clicks/clicks.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 
